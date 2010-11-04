@@ -20,7 +20,7 @@ Getting Started
 
 (if you don't already have one).
 
-Go to http://developer.force.com and sign up for an org. You should receive your username and password promptly by email. Once you have your credentials, log into your new org (that's what we call your workspace on Force.com, it's short for organization) and get a security token. Log in at https://login.salesforce.com, click on your username in the top-right, select Setup and go to My Personal Information -> Reset My Security Token.
+Go to http://developer.force.com and sign up for an org. You should receive your username and password promptly by email. Once you have your credentials, log into your new org (that's what we call your workspace on Force.com, it's short for organization) and get a security token. Log in at [https://login.salesforce.com], click on your username in the top-right, select Setup and go to My Personal Information -> Reset My Security Token.
 
 By resetting the token, you will receive an email with a working token. You will need to append this token to you password in your application configuration.
 
