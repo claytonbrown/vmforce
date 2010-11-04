@@ -1,16 +1,34 @@
 Alpha VMforce SDK Home
 ======================
 
-This project is highly experimental at this point and not for the faint of heart. The project currently only contains sample Force.com Java applications that uses a early build of the SDK published to a temporary maven repository. Going forward, this project will be the home for the SDK code itself.
+This is the home for alpha testers of VMforce. It is highly experimental and currently incomplete. Here's what you can do:
 
-If you decide to try out the samples or build something yourself, you can use the issue tracker to let us know about problems.
+- Get sample VMforce code showing how to set up a Spring Web project with maven repositories and all
+- Use the Issues Tab to file issues related to VMforce
 
-What can you do with the SDK?
------------------------------
+Not yet available:
 
-The SDK builds upon the Force.com Web Service Connector toolkit that has been available for some time. You can use this SDK to build Spring Web applications that uses Force.com as a data store and user management system.
+- Proper documentation (coming)
+- Full source code for the SDK (coming)
 
-At this point, all code in the SDK is experimental and incomplete. It is published here for the purpose of testing how the project should be hosted and managed going forward and to give access to those brave souls who want to experiment at this early stage.
+What works?
+-----------
+
+- When set up with username and password in a config file, you app can connect to Force.com APIs using WSC. WSC connection objects are autowired into your code
+- You can define JPA entities in Java that will be created as Custom Objects in Force.com. Only straight entities with no relationships works well
+- You can query data using JPQL
+- You can make changes to data using simple atomic transactions. Advanced transaction sematrics does not work
+- You can make HTTP calls to other services
+- You can configure SSO and access control using Spring Security. Users will be sent to Salesforce login page and your code can use Spring Security to check for user authentication and authorization
+
+What doesn't work?
+------------------
+
+- OAuth Single Sign-on is a bit tricky to set up for VMforce deployed apps. We will document/fix this soon
+- Relationships doesn't really work yet. Coming soon.
+- Transactions are simplistic. The SDK does not maintain a transaction on the server side, so it only supports what can be accomplished by caching changes in Java until the transaction commits and then sending all changes in a single web service request. This only works for up to 200 changes and only for a single operation type (i.e. insert only or delete only, but not both). This may not be fixed any time soon.
+- Many parts of JPQL are not implemented yet. 
+
 
 
 Getting Started
