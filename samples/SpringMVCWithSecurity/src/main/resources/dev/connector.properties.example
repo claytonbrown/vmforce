@@ -1,0 +1,12 @@
+# Connection configuration for your Force.com Java app
+
+force.apiVersion = 20.0
+force.endPoint = https://login.salesforce.com
+
+force.consumerKey = Copy_consumer_key_from_remote_access_entry_created_in_your_DE_org_to_here
+force.consumerSecret = Copy_consumer_secret_from_remote_access_entry_created_in_your_DE_org_to_here
+
+force.userName = Your_DE_org_username
+
+force.password = Your_DE_org_password
+
