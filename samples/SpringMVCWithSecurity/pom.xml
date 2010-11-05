@@ -24,9 +24,25 @@
   	<repository>
   		<id>forcedotcom-tmp-repo</id>
   		<name>Force.com Temporary Maven Repo</name>
-  		<url>http://github.com/forcedotcom/tmp-maven-repo/raw/master/snapshots</url>
+  		<url>https://github.com/forcedotcom/tmp-maven-repo/raw/master/snapshots</url>
   	</repository>
+	<repository>
+        <id>com.springsource.repository.bundles.release</id>
+        <name>SpringSource Enterprise Bundle Repository - SpringSource Releases</name>
+        <url>http://repository.springsource.com/maven/bundles/release</url>
+      </repository>
+	<repository>
+        <id>com.springsource.repository.bundles.external</id>
+        <name>SpringSource Enterprise Bundle Repository - External Releases</name>
+        <url>http://repository.springsource.com/maven/bundles/external</url>
+      </repository>
   </repositories>  
+     <pluginRepositories>
+      <pluginRepository>
+        <id>DataNucleus_2</id>
+        <url>http://www.datanucleus.org/downloads/maven2/</url>
+      </pluginRepository>
+    </pluginRepositories>
   
   <build>
     <finalName>SpringMVCWithSecurity</finalName>
