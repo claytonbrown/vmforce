@@ -17,7 +17,7 @@ What works?
 - When set up with username and password in a config file, you app can connect to Force.com APIs using WSC. WSC connection objects are autowired into your code
 - You can define JPA entities in Java that will be created as Custom Objects in Force.com. Only straight entities with no relationships works well
 - You can query data using JPQL
-- You can make changes to data using simple atomic transactions. Advanced transaction sematrics does not work
+- You can make changes to data using simple atomic transactions. Advanced transaction semantics does not work
 - You can make HTTP calls to other services
 - You can configure SSO and access control using Spring Security. Users will be sent to Salesforce login page and your code can use Spring Security to check for user authentication and authorization
 
@@ -26,6 +26,7 @@ What doesn't work?
 
 - OAuth Single Sign-on is a bit tricky to set up for VMforce deployed apps. We will document/fix this soon
 - Relationships doesn't really work yet. Coming soon.
+- If you make destructive changes to your schema (e.g. remove a field) or if you want to delete/rename an entity, you will have to log into the org and use the UI to delete the custom object. The JPA implementation can only create and update entities at this point.
 - Transactions are simplistic. The SDK does not maintain a transaction on the server side, so it only supports what can be accomplished by caching changes in Java until the transaction commits and then sending all changes in a single web service request. This only works for up to 200 changes and only for a single operation type (i.e. insert only or delete only, but not both). This may not be fixed any time soon.
 - Many parts of JPQL are not implemented yet. 
 
