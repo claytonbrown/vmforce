@@ -39,7 +39,7 @@ Getting Started
 
 (if you don't already have one).
 
-Technically, it is possible to use the SDK with any Force.com organization hosted on the production pods (accessed through https://login.salesforce.com), the sandbox pods (accessed through https://test.salesforce.com) or the experimental VMF instances, which are small Force.com instances used specifically for VMforce.
+Technically, it is possible to use the SDK with any Force.com organization hosted on the [production pods](https://login.salesforce.com), the sandbox pods (accessed through https://test.salesforce.com) or the experimental VMF instances, which are small Force.com instances used specifically for VMforce.
 
 You can start building apps right away and point it to one of your existing orgs on sandbox or production as long as you deploy your app on a local tomcat server. If you deploy your app to the VMforce cloud servers, you will need to use an org on the VMF instance. Please contact jjoergensen@salesforce.com to get an org on this instance. But note that it is not necessary to get started.
 
