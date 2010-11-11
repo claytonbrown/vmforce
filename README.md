@@ -52,9 +52,9 @@ If you're not a git user, you can just download [the whole project as a zip file
 We use SpringSource Tool Suite which comes with maven integration and other good stuff, so that's what we'll assume here:
 
 1. If you haven't done so already, [download and install SpringSource Tool Suite 2.5.0](http://www.springsource.com/developer/sts) (registration required).
-1. Open the IDE and choose "File -> Import..."
-2. Select Existing Maven project
-3. Navigate to the sample you want to import, (we'll assume SpringMVCWithSecurity). Highlight directory and Finish. Click Ok to start import
+2. Open the IDE and choose "File -> Import..."
+3. Select Existing Maven project
+4. Navigate to the sample you want to import, (we'll assume SpringMVCWithSecurity). Highlight directory and Finish. Click Ok to start import
 
 The project should import and compile with no errors.
 
