@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.vmforce</groupId>
-	<artifactId>samples</artifactId>
+	<artifactId>VMforceSpringMVC</artifactId>
 	<name>VMforceSpringMVC</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
@@ -125,8 +125,57 @@
 			<scope>test</scope>
 		</dependency>
         
+		<!--  VMForce -->
+
+	    <dependency>
+	      <groupId>com.salesforce.sdk.persistence</groupId>
+	      <artifactId>datanucleus-sfdc</artifactId>
+	      <version>20.0.1-SNAPSHOT</version>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.datanucleus</groupId>
+	      <artifactId>datanucleus-core</artifactId>
+	      <version>2.1.0-release</version>
+	      <scope>runtime</scope>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.datanucleus</groupId>
+	      <artifactId>datanucleus-enhancer</artifactId>
+	      <version>2.1.0-release</version>
+	      <scope>runtime</scope>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.datanucleus</groupId>
+	      <artifactId>datanucleus-jpa</artifactId>
+	      <version>2.1.0-release</version>
+	      <scope>runtime</scope>
+	    </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2</version>
+		</dependency>
+    
 	</dependencies>
 	<repositories>
+		<!--  VMforce repository (temporary location)` -->
+		<repository>
+			<id>forcedotcom-tmp-repo</id>
+			<name>Force.com Temporary Maven Repo</name>
+			<url>https://github.com/forcedotcom/tmp-maven-repo/raw/master/snapshots</url>
+		</repository>
 		<!-- For testing against latest Spring snapshots -->
 		<repository>
 			<id>org.springframework.maven.snapshot</id>
@@ -143,7 +192,33 @@
 			<snapshots><enabled>false</enabled></snapshots>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>DataNucleus_2</id>
+			<url>http://www.datanucleus.org/downloads/maven2/</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
+	    <filters>
+	        <filter>${basedir}/src/main/resources/connector.properties</filter>
+	    </filters>
+	    
+	    <resources>
+	      <resource>
+	        <directory>${basedir}/src/main/resources</directory>
+	        <filtering>true</filtering>
+	        <includes>
+	          <include>**/persistence.xml</include>
+	        </includes>
+	      </resource>
+	      <resource>
+	        <directory>${basedir}/src/main/resources</directory>
+	        <includes>
+	          <include>connector.properties</include>
+	        </includes>
+	      </resource>
+	    </resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -220,6 +295,23 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.0-beta-1</version>
 			</plugin>						
+			<plugin>
+			  <groupId>org.datanucleus</groupId>
+			  <artifactId>maven-datanucleus-plugin</artifactId>
+			  <version>2.1.0-release</version>
+			  <configuration>
+			    <api>JPA</api>
+			    <verbose>true</verbose>
+			  </configuration>
+			  <executions>
+			    <execution>
+			      <phase>process-classes</phase>
+			      <goals>
+			        <goal>enhance</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
