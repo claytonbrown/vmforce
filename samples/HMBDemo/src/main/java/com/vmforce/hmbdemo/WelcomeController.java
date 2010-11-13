@@ -37,12 +37,13 @@ public class WelcomeController {
 	 * on the default request-to-view-translator.
 	 * @throws ConnectionException 
 	 */
-	@RequestMapping(value="/welcome", method = RequestMethod.GET)
+	@RequestMapping(value="/", method = RequestMethod.GET)
 	public ModelAndView welcome() throws ConnectionException {
 		logger.info("Welcome!");
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("contacts",em.createQuery("SELECT c FROM Contact c").setMaxResults(10).getResultList());
 		mv.addObject("userInfo",sfdc.getConnection().getUserInfo());
+		mv.setViewName("welcome");
 		return mv;
 	}
 	
@@ -71,9 +72,18 @@ public class WelcomeController {
 		return mv;
 	}
 
-	@Transactional
 	@RequestMapping(value="/{contactId}/create", method = RequestMethod.POST)
 	public ModelAndView createAttendeeFromContact(@ModelAttribute HMBAttendee attendee, @PathVariable String contactId) {
+		createAttendee(attendee, contactId);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("attendee",attendee);
+		mv.setViewName("attendee");
+		return mv;
+	}
+
+	@Transactional
+	private void createAttendee(HMBAttendee attendee, String contactId) {
 		Contact c = em.find(Contact.class, contactId);
 
 		attendee.setRelatedContact(c);
@@ -81,12 +91,8 @@ public class WelcomeController {
 		attendee.setName(c.getFirstName()+" "+c.getLastName());
 		
 		em.persist(attendee);
-		em.flush();
-		
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("attendee",attendee);
-		mv.setViewName("attendee");
-		return mv;
 	}
+	
+	
 
 }

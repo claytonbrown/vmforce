@@ -2,60 +2,68 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.example</groupId>
+	<groupId>com.vmforce</groupId>
 	<artifactId>HMBDemo</artifactId>
 	<name>HMBDemo</name>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<org.springframework.version>3.0.3.RELEASE</org.springframework.version>
-		<org.slf4j.version>1.5.10</org.slf4j.version>
-		<testng.version>5.12.1</testng.version>
+		<java-version>1.6</java-version>
+		<org.springframework-version>3.0.4.RELEASE</org.springframework-version>
+		<org.springframework.roo-version>1.0.2.RELEASE</org.springframework.roo-version>
+		<org.aspectj-version>1.6.9</org.aspectj-version>
+		<org.slf4j-version>1.5.10</org.slf4j-version>
 	</properties>
-	<repositories>
-  	<repository>
-  		<id>forcedotcom-tmp-repo</id>
-  		<name>Force.com Temporary Maven Repo</name>
-  		<url>https://github.com/forcedotcom/tmp-maven-repo/raw/master/snapshots</url>
-  	</repository>
-	</repositories>
 	<dependencies>
-
-		<!--  Spring -->
+		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework-version}</version>
 			<exclusions>
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				</exclusion>
+				 </exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework-version}</version>
 		</dependency>
-
+		<!-- Roo dependencies -->
+		<dependency>
+			<groupId>org.springframework.roo</groupId>
+			<artifactId>org.springframework.roo.annotations</artifactId>
+			<version>${org.springframework.roo-version}</version>
+			<scope>provided</scope>
+		</dependency>
+				
+		<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>	
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j.version}</version>
+			<version>${org.slf4j-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${org.slf4j.version}</version>
+			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j.version}</version>
+			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -83,64 +91,13 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- @Inject -->
 		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>2.2</version>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>1.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.salesforce.sdk.persistence</groupId>
-			<artifactId>datanucleus-sfdc</artifactId>
-			<version>20.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.salesforce</groupId>
-			<artifactId>metadataAPI</artifactId>
-			<version>20.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.salesforce.sdk.connector</groupId>
-			<artifactId>service-connector</artifactId>
-			<version>20.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.datanucleus</groupId>
-			<artifactId>datanucleus-core</artifactId>
-			<version>2.1.1</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.datanucleus</groupId>
-			<artifactId>datanucleus-enhancer</artifactId>
-			<version>2.1.0-release</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.datanucleus</groupId>
-			<artifactId>datanucleus-jpa</artifactId>
-			<version>2.1.1</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<!--  URL Rewrite -->
-		<dependency>
-			<groupId>org.tuckey</groupId>
-			<artifactId>urlrewritefilter</artifactId>
-			<version>3.1.0</version>
-			<scope>runtime</scope>
-		</dependency>
-
+				
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -159,44 +116,123 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
+	
+		<!-- Test -->
 		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>${testng.version}</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
 		</dependency>
+        
+		<!--  VMForce -->
 
+	    <dependency>
+	      <groupId>com.salesforce.sdk.persistence</groupId>
+	      <artifactId>datanucleus-sfdc</artifactId>
+	      <version>20.0.1-SNAPSHOT</version>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.datanucleus</groupId>
+	      <artifactId>datanucleus-core</artifactId>
+	      <version>2.1.0-release</version>
+	      <scope>runtime</scope>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.datanucleus</groupId>
+	      <artifactId>datanucleus-enhancer</artifactId>
+	      <version>2.1.0-release</version>
+	      <scope>runtime</scope>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.datanucleus</groupId>
+	      <artifactId>datanucleus-jpa</artifactId>
+	      <version>2.1.0-release</version>
+	      <scope>runtime</scope>
+	    </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2</version>
+		</dependency>
+    
 	</dependencies>
-
-
-
+	<repositories>
+		<!--  VMforce repository (temporary location)` -->
+		<repository>
+			<id>forcedotcom-tmp-repo</id>
+			<name>Force.com Temporary Maven Repo</name>
+			<url>https://github.com/forcedotcom/tmp-maven-repo/raw/master/snapshots</url>
+		</repository>
+		<!-- For testing against latest Spring snapshots -->
+		<repository>
+			<id>org.springframework.maven.snapshot</id>
+			<name>Spring Maven Snapshot Repository</name>
+			<url>http://maven.springframework.org/snapshot</url>
+			<releases><enabled>false</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+		<!-- For developing against latest Spring milestones -->
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+			<snapshots><enabled>false</enabled></snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>DataNucleus_2</id>
+			<url>http://www.datanucleus.org/downloads/maven2/</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
-		<filters>
-			<filter>${basedir}/src/main/resources/${buildEnv}/config.properties</filter>
-		</filters>
-		<resources>
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-				<filtering>true</filtering>
-				<includes>
-					<include>**/persistence.xml</include>
-					<include>*</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>${basedir}/src/main/resources/${buildEnv}</directory>
-				<includes>
-					<include>config.properties</include>
-				</includes>
-			</resource>
-		</resources>
+	    <filters>
+	        <filter>${basedir}/src/main/resources/connector.properties</filter>
+	    </filters>
+	    
+	    <resources>
+	      <resource>
+	        <directory>${basedir}/src/main/resources</directory>
+	        <filtering>true</filtering>
+	        <includes>
+	          <include>**/persistence.xml</include>
+	        </includes>
+	      </resource>
+	      <resource>
+	        <directory>${basedir}/src/main/resources</directory>
+	        <includes>
+	          <include>connector.properties</include>
+	        </includes>
+	      </resource>
+	    </resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>VMforceSpringMVC</warName>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -213,48 +249,69 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.datanucleus</groupId>
-				<artifactId>maven-datanucleus-plugin</artifactId>
-				<version>2.1.0-release</version>
-				<configuration>
-					<mappingIncludes>**/*.class</mappingIncludes>
-					<verbose>true</verbose>
-					<enhancerName>ASM</enhancerName>
-					<api>JPA</api>
-					<props>${basedir}/datanucleus.properties</props>
-				</configuration>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<!-- Have to use version 1.2 since version 1.3 does not appear to work with ITDs -->
+				<version>1.2</version>
+				<dependencies>
+					<!-- You must use Maven 2.0.9 or above or these are ignored (see MNG-2972) -->
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjrt</artifactId>
+						<version>${org.aspectj-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjtools</artifactId>
+						<version>${org.aspectj-version}</version>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
-						<phase>process-classes</phase>
 						<goals>
-							<goal>enhance</goal>
+							<goal>compile</goal>
+							<goal>test-compile</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<outxml>true</outxml>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<junitArtifactName>junit:junit</junitArtifactName>
+					<excludes>
+						<exclude>**/*_Roo_*</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.0-beta-1</version>
+			</plugin>						
+			<plugin>
+			  <groupId>org.datanucleus</groupId>
+			  <artifactId>maven-datanucleus-plugin</artifactId>
+			  <version>2.1.0-release</version>
+			  <configuration>
+			    <api>JPA</api>
+			    <verbose>true</verbose>
+			  </configuration>
+			  <executions>
+			    <execution>
+			      <phase>process-classes</phase>
+			      <goals>
+			        <goal>enhance</goal>
+			      </goals>
+			    </execution>
+			  </executions>
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<properties>
-				<buildEnv>dev</buildEnv>
-			</properties>
-		</profile>
-		<profile>
-			<id>blitz</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<buildEnv>blitz</buildEnv>
-			</properties>
-		</profile>
-		<profile>
-			<id>prod</id>
-			<properties>
-				<buildEnv>prod</buildEnv>
-			</properties>
-		</profile>
-	</profiles>
 </project>
