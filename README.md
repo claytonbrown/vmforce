@@ -7,7 +7,7 @@ This is the home for alpha testers of VMforce. It is highly experimental and cur
 
 ## What works?
 
-- When set up with username and password in a config file, you app can connect to Force.com APIs using WSC. WSC connection objects are autowired into your code
+- When set up with username and password in a config file, you app can connect to Force.com APIs using WSC. WSC connection objects are auto-wired into your code
 - You can define JPA entities in Java that will be created as Custom Objects in Force.com. Only straight entities with no relationships works well
 - You can query data using JPQL
 - You can make changes to data using simple atomic transactions. Advanced transaction semantics does not work
@@ -51,14 +51,13 @@ This repository contain various sample projects. During the alpha phase we will 
 
 We use SpringSource Tool Suite which comes with maven integration and other good stuff, so that's what we'll assume here:
 
-1. If you haven't done so already, [download and install SpringSource Tool Suite 2.5.0](http://www.springsource.com/developer/sts) (registration required).
-2. Open the IDE and choose "File -> Import..."
-3. Select Existing Maven project
-4. Navigate to the sample you want to import, (we'll assume SpringMVCWithSecurity). Highlight directory and Finish. Click Ok to start import
+1. In STS, choose "File -> Import..."
+1. Select Existing Maven project
+1. Navigate to the sample you want to import, (we'll assume SpringMVCWithSecurity). Highlight directory and Finish. Click Ok to start import
 
-The project should import and compile with no errors.
+The project should import and compile. The compilation may fail until next step is completed.
 
-### Configure Force.com connector information
+### Set up the connector.properties file
 
 Go to the directory src/main/resources and copy the example properties file to connector.properties
 
@@ -90,7 +89,7 @@ This step is currently only needed if the sample uses OAuth for single sign-on. 
 
 ### Build your app
 
-STS should build your app automatically. But it is worthwhile mentioned what happens during a build:
+STS should build your app automatically. But it is worthwhile mentioning what happens during a build:
 
 * All Java code is compiled
 * The files in the src/main/resources directory are copied to the build target using filtering. Specifically, variables in persistence.xml will be substituted with their values found in connector.properties. Note that connector.properties serve a dual purpose. It is used for this filtering step, but it is also copied to the build target and used as a Spring property file. So all the parameters in connector.properties can be used in you Spring bean files.
@@ -125,7 +124,7 @@ From here you can go explore all the possible apps you can build with the VMforc
 
 ## Deploy your app to VMforce
 
-Remember, you can only do this if you have an account on the special VMF instance as mentioned earlier.
+Remember, you can only do this if you have an account on the special VMF instance.
 
 ### Install the VMforce STS plugin
 
