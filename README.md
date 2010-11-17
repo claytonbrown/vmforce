@@ -116,7 +116,7 @@ Here are the steps to configure the tc Server and deploy your app:
 1. Select the VMforceSpringMVC app in the navigator, right-click and select Run As -> Run on Server
 1. Select your newly created server and click finish.
 
-tc Server should now start up and deploy your app. If you're lucky it will even open the front page of your web app in the STS builtin browser or your system's default browser. Your app should be running on [http://localhost:8080/VMforceSpringMVC](http://localhost:8080/VMforceSpringMVC).
+tcServer should now start up and deploy your app. It will even open the front page of your web app in the STS builtin browser or your system's default browser. Your app should be running on [http://localhost:8080/VMforceSpringMVC](http://localhost:8080/VMforceSpringMVC).
 
 ### Summary
 
@@ -128,7 +128,7 @@ Remember, you can only do this if you have an account on the special VMF instanc
 
 ### Install the VMforce STS plugin
 
-The SpringSource team has built a VMforce plugin for STS that allows you to deploy and manage your application in the cloud just as if it was a local server. Here are the steps to installing the plugin into STS:
+The VMforce plugin for STS allows you to deploy and manage your application in the cloud just as if it was a local server. Here are the steps to installing the plugin into STS:
 
 1. Select Help -> Install New Software...
 1. Select Add
@@ -155,4 +155,30 @@ You're now ready to deploy your application:
 1. On the launch application dialog, change the name of your app to include something unique, so it doesn't clash with other names. All apps are currently deployed in a single namespace.
 1. You're done. STS will open a browser on your app's front page. If you see a 404, try refresh a few seconds later.
 
+### Using the command-line tool
+
+VMforce also comes with a command line tool. It's a ruby program, so you need Ruby on your machine. Install by running
+
+	$ sudo gem install vmc
+
+You can get help with
+
+	$ vmc help
+	
+For example, to list your deployed apps:
+
+	$ vmc login
+	Email: jespertest2@vmforce.com
+	Password: ********
+	successfully logged in
+
+	$ vmc apps
+	No applications available.
+
+To deploy an app like VMforceSpringMVC:
+
+	$ cd home/of/VMforceSpringMVC
+	$ mvn package
+	$ cd target
+	$ vmc push
 
