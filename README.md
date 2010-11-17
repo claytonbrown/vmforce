@@ -1,18 +1,19 @@
 # Alpha VMforce SDK Home
 
-This is the home for alpha testers of VMforce. It is highly experimental and currently incomplete. Here's what you can do:
+This is the home for alpha testers of VMforce. It is still somewhat experimental and certainly incomplete. Here's what this project is currently for:
 
-- Get sample VMforce code showing how to set up a Spring Web project with maven repositories and all
+- Get sample VMforce code showing how to set up various sample VMforce projects based on Spring MVC and other project types.
 - Use the Issues Tab to file issues related to VMforce
 
 ## What works?
 
-- When set up with username and password in a config file, you app can connect to Force.com APIs using WSC. WSC connection objects are auto-wired into your code
-- You can define JPA entities in Java that will be created as Custom Objects in Force.com. Only straight entities with no relationships works well
-- You can query data using JPQL
+- Build Spring MVC based web apps that use a Force.com JPA provider to connect to Force.com as a database
+  - Simple entities and many-to-one relationship navigations work. One-to-many is coming soon.
+  - You can define your entities in Java and the JPA provider will create and update the Force.com schema. It will not delete fields or entities if you delete them in Java.
+- You can query data using JPQL. Not everything JPQL is supported.
 - You can make changes to data using simple atomic transactions. Advanced transaction semantics does not work
 - You can make HTTP calls to other services
-- You can configure SSO and access control using Spring Security. Users will be sent to Salesforce login page and your code can use Spring Security to check for user authentication and authorization
+- You can configure SSO and access control using Spring Security. Users will be sent to Salesforce login page and your code can use Spring Security to check for user authentication and authorization. This requires you to set up OAuth which is still a bit tricky.
 
 ## What doesn't work?
 
@@ -22,42 +23,37 @@ This is the home for alpha testers of VMforce. It is highly experimental and cur
 - Transactions are simplistic. The SDK does not maintain a transaction on the server side, so it only supports what can be accomplished by caching changes in Java until the transaction commits and then sending all changes in a single web service request. This only works for up to 200 changes and only for a single operation type (i.e. insert only or delete only, but not both). This may not be fixed any time soon.
 - Parts of JPQL is not implemented yet. 
 
+# Getting Started
 
-## Getting Started with a sample running on localhost
+This is a quick guide to configuring your first VMforce project, deploy it on your own local tcServer and then deploy it to VMforce.
 
-### Install the latest version of SpringSource Tool Suite
+## Install the latest version of SpringSource Tool Suite
 
-SpringSource Tool Suite is the primary IDE for VMforce. This is the only IDE we test with right now. [Get the latest version here](http://www.springsource.com/developer/sts).
+[Get the latest version here](http://www.springsource.com/developer/sts).
 
-### Get a Force.com Developer Account
+## Get a Developer Account
 
-(if you don't already have one).
+If you're reading this, you should be part of the VMforce alpha program and you should have received login credentials to a VMforce developer account on a special VMforce instance of Force.com. The login endpoint for this instance is [https://vmf01.t.salesforce.com](https://vmf01.t.salesforce.com).
 
-Developer accounts are also called developer organizations because you're account lives inside its own organization. You can think of an organization as a combination of a database and a domain of users. Normally all employees in a company use a single organization for CRM, service & support, collaboration, 3rd party installed and custom-built applications. In development mode, you as a developer has the whole organization to yourself.
+If you haven't received your account, please talk to your contact at Salesforce.com or VMWare to get set up.
 
-Your Force.com Developer Organization is the database for your VMforce application and it is also responsible for user management, authentication and application configuration.
-
-Technically, it is possible to use the SDK with any Force.com organization hosted on the [production pods](https://login.salesforce.com), the sandbox pods (accessed through https://test.salesforce.com) or the experimental VMF instances, which are small Force.com instances used specifically for VMforce. You can build Java applications with the SDK without ever deploying them to VMforce.
-
-To deploy your app on VMforce, you will need to have an account (organization) on the special VMF instance. Please contact jjoergensen@salesforce.com to get an org on this instance. But note that it is not necessary to get started.
-
-### Clone this project
+## Clone this project
 
 If you don't have the git client and are not using git on a regular basis, you can just download [the whole project as a zip file](https://github.com/forcedotcom/vmforce/zipball/master). Obviously it will be easier to track changes and stay up to date if you use git.
 
 This repository contain various sample projects. During the alpha phase we will constantly tweak these samples and add new ones, so expect a moving target.
 
-### Import the VMforceSpringMVC sample
+## Import the VMforceSpringMVC sample
 
 We use SpringSource Tool Suite which comes with maven integration and other good stuff, so that's what we'll assume here:
 
 1. In STS, choose "File -> Import..."
 1. Select Existing Maven project
-1. Navigate to the sample you want to import, (we'll assume SpringMVCWithSecurity). Highlight directory and Finish. Click Ok to start import
+1. Navigate to the sample you want to import, (we'll assume VMforceSpringMVC). Highlight directory and Finish. Click Ok to start import
 
 The project should import and compile. The compilation may fail until next step is completed.
 
-### Set up the connector.properties file
+## Set up the connector.properties file
 
 Go to the directory src/main/resources and copy the example properties file to connector.properties
 
@@ -66,28 +62,9 @@ Go to the directory src/main/resources and copy the example properties file to c
 
 Edit the connector.properties files and insert your Force.com username and password.
 
-If you are NOT using an account on the special VMF instance, you will need to append your security token to the password. [This page](https://help.salesforce.com/apex/HTViewHelpDoc?id=user_security_token.htm&language=en) explains how to get your security token sent to you by email.
-
-If you ARE using a VMF instance, you currently shouldn't need a security token, but this may change in the near future.
-
 For now, you can ignore the OAuth consumer key and secret. We will shortly document how to use these.
 
-<!--
-### Step 5 (Optional): Register your application in your org and configure application keys
-
-This step is currently only needed if the sample uses OAuth for single sign-on. This step is currently only supported for local deployments.
-
-1. Log into your org
-2. Click on your name in upper-right corner and select Setup
-3. Go to App Setup -> Develop -> Remote Access and Click New to create a new application entry
-4. Type the name of the sample app in the Application Field prefixed with "local:", e.g. "local:SpringMVCWithSecurity". This name is not used, but this keeps it unique for future purposes
-5. Assuming you will run your app on http://localhost:8080, set the callback URL to http://localhost:8080/<appname>/\_auth for example: http://localhost:8080/SpringMVCWithSecurity/\_auth.
-6. Select "No user approval required".
-7. Click Save. Rest of fields can be left empty
-8. Copy and paste the application key and secret from the result page to the corresponding variable in the connector.properties file.
--->
-
-### Build your app
+## Build your app
 
 STS should build your app automatically. But it is worthwhile mentioning what happens during a build:
 
@@ -101,14 +78,14 @@ Note that if you make changes to your JPA entity classes, you must do a clean bu
 
 If you have made changes to your project dependencies or otherwise messed with the pom.xml maven file, it's a good idea to do the following: Right-click on your project in the navigation pane and select Maven -> Update Project Configuration.
 
-### Deploy your app locally
+## Deploy your app locally
 
-Local deployment is an important part of VMforce development. Your app will run on a local tomcat server but it will still use your Force.com developer account hosted in the cloud as its database. The benefit is that you can more quickly redeploy code and you can use standard debugging tools such as the Eclipse debugger. The limitation is you cannot develop while offline. We do not offer a locally hosted version of the Force.com database and probably never will.
+Local deployment is an important part of VMforce development. Your app will run on a local tomcat server but it will still use your Cloud based Force.com developer account as its database. By running your app on a local server you can more quickly redeploy code and you can use standard debugging tools such as the Eclipse debugger. Using a cloud database for development means that you'll still have to be online to develop, but the benefit is that the database is managed for you and you won't have to deal with any incompatibility problems when you migrate from development to production.
 
-Here are the steps to configure the tc Server and deploy your app:
+Here are the steps to configure a local tcServer and deploy your app:
 
 1. There should be a "Servers" pane in the lower left part of STS. Right-click in this pane and select New -> Server
-1. Select SpringSource tc Server 2.0 and click next, then click finish on the following dialog
+1. Select SpringSource tcServer 2.0 and click next, then click finish on the following dialog
 1. Right-click on your new server in the Servers pane and select "Publish"
 1. Now double-click on the server to open the configuration page
 1. On the configuration page, in the Server Locations section, select "Use workspace metadata". This prevents your central tc Server configuration from getting hosed by individual projects
@@ -118,13 +95,9 @@ Here are the steps to configure the tc Server and deploy your app:
 
 tcServer should now start up and deploy your app. It will even open the front page of your web app in the STS builtin browser or your system's default browser. Your app should be running on [http://localhost:8080/VMforceSpringMVC](http://localhost:8080/VMforceSpringMVC).
 
-### Summary
-
-From here you can go explore all the possible apps you can build with the VMforce SDK.
-
 ## Deploy your app to VMforce
 
-Remember, you can only do this if you have an account on the special VMF instance.
+When you have tested your app locally, the time has come to deploy it to the cloud, so you can perform user testing and final production rollout. You can deploy your app to VMforce using either the VMforce plugin for SpringSource Tool Suite or the vmc command-line interface.
 
 ### Install the VMforce STS plugin
 
@@ -157,7 +130,7 @@ You're now ready to deploy your application:
 
 ### Using the command-line tool
 
-VMforce also comes with a command line tool. It's a ruby program, so you need Ruby on your machine. Install by running
+VMforce also comes with a [command line tool called vmc](http://rubygems.org/gems/vmc). It's a ruby program so you'll need Ruby on your machine. Install by running
 
 	$ sudo gem install vmc
 
