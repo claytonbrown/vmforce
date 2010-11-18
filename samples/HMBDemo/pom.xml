@@ -171,11 +171,11 @@
 	</dependencies>
 	<repositories>
 		<!--  VMforce repository (temporary location)` -->
-		<repository>
-			<id>forcedotcom-tmp-repo</id>
-			<name>Force.com Temporary Maven Repo</name>
-			<url>https://github.com/forcedotcom/tmp-maven-repo/raw/master/snapshots</url>
-		</repository>
+	        <repository>
+                    <id>com.force.maven.snapshot</id>
+                    <name>Force.com Maven Snapshot Repo</name>
+                    <url>http://repo.t.salesforce.com/archiva/repository/snapshots</url>
+                </repository>
 		<!-- For testing against latest Spring snapshots -->
 		<repository>
 			<id>org.springframework.maven.snapshot</id>

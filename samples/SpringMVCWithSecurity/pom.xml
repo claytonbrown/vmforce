@@ -21,12 +21,12 @@
   </properties>
 
   <repositories>
-  	<repository>
-  		<id>forcedotcom-tmp-repo</id>
-  		<name>Force.com Temporary Maven Repo</name>
-  		<url>https://github.com/forcedotcom/tmp-maven-repo/raw/master/snapshots</url>
-  	</repository>
-	<repository>
+      <repository>
+         <id>com.force.maven.snapshot</id>
+         <name>Force.com Maven Snapshot Repo</name>
+         <url>http://repo.t.salesforce.com/archiva/repository/snapshots</url>
+      </repository>
+      <repository>
         <id>com.springsource.repository.bundles.release</id>
         <name>SpringSource Enterprise Bundle Repository - SpringSource Releases</name>
         <url>http://repository.springsource.com/maven/bundles/release</url>
