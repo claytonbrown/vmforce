@@ -134,7 +134,7 @@ VMforce also comes with a [command line tool called vmc](http://rubygems.org/gem
 
 	$ sudo gem install vmc
 
-You can get help with
+(See below for Windows install). You can get help with
 
 	$ vmc help
 	
@@ -154,4 +154,19 @@ To deploy an app like VMforceSpringMVC:
 	$ mvn package
 	$ cd target
 	$ vmc push
+
+### Installing VMC on Windows
+
+1. Install Ruby for Windows(1.9.2). You can find the installer at http://rubyinstaller.org/
+2. “gem” executable is packaged with “ruby for Windows” so you don’t have to explicitly install “gem”
+3. Set the “<RUBY_INSTALL_DIR>\bin” in your Path. You can do that in your current command window by doing
+
+	`set PATH=<RUBY_INSTALL_DIR>\bin;%PATH%;`
+
+4. To install “vmc” command line, just type the following:
+ 
+	`gem install vmc`
+ 
+5. If you see any errors, try the above command again (Note: The first time I did it I got some errors when gem was trying to install “ri” and “RDoc” libraries/gems).
+6. If you still see errors, contact the vmc team for more help.
 
