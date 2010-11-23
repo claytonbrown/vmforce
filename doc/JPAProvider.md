@@ -105,11 +105,11 @@ This example is from the [VMforceSpringMVC sample app](https://github.com/forced
 
 Besides the connector endpoint, version and credentials, you should only care about the following configurations in this file:
 
-#### `datanucleus.autoCreateSchema`
+#### datanucleus.autoCreateSchema
 
 Set to false if you don't want your schema created or updated automatically by DataNucleus each time you restart the server or run tests
 
-#### `datanucleus.Optimistic`
+#### datanucleus.Optimistic
 
 Set this property to true for optimistic transactions. Optimistic concurrency control is a method that assumes that multiple transactions can complete without affecting each other, and that transactions can proceed without locking the data resources that they affect. Before committing, each transaction verifies that no other transaction has modified its data. If the check reveals conflicting modifications, the committing transaction rolls back. When this property is set to true, each Java class that models an entity used in a transaction should include a field with the following signature: 
 
@@ -118,11 +118,11 @@ Set this property to true for optimistic transactions. Optimistic concurrency co
 
 The `lastModifiedDate` field is a system field that is automatically created for every entity in the Force.com database. The @Version annotation enables JPA to use this date field to do `ifModifiedBefore()` checks on update and delete operations. If this check indicates that another operation has updated a record in the transaction, a `javax.persistence.OptimisticLockException` is thrown as the record in the transaction has stale data. If the `sfdc.AllOrNothing` property is enabled, the transaction is rolled back.
 	
-#### `datanucleus.datastoreTransactionDelayOperations`
+#### datanucleus.datastoreTransactionDelayOperations
 
 Set this property to true to ensure that all JPA operations are buffered until either commit() is called on a transaction or flush() is called on an EntityManager. If the property is set to false, every operation handled by the EntityManager is independently committed to the database.
 
-#### `sfdc.AllOrNothing`
+#### sfdc.AllOrNothing
 
 Set this property to true to ensure that all changes are rolled back if any errors occur when persisting records. If the property is set to false, changes to records with no errors are committed even if there are errors persisting other records in the transaction. If a transaction includes an insert, update, and a delete operation, this property applies to each operation separately. For example, if the insert and delete operations have no errors, but the update operation has at least one error, the insert and operations are committed, while the update operation doesn't change any records due to the error.
 
