@@ -11,7 +11,7 @@
 List of wines:
 <ul>
 <c:forEach items="${wines}" var="wine">
-	<li>${wine.name} (by producer ${wine.producer.name})</li>
+	<li><a href="wine/${wine.id}">${wine.name}</a> (by producer ${wine.producer.name})</li>
 </c:forEach>
 </ul>
 <form action="" method="POST">
