@@ -23,6 +23,13 @@ This is the home for alpha testers of VMforce. It is still somewhat experimental
 - Transactions are simplistic. The SDK does not maintain a transaction on the server side, so it only supports what can be accomplished by caching changes in Java until the transaction commits and then sending all changes in a single web service request. This only works for up to 200 changes and only for a single operation type (i.e. insert only or delete only, but not both). This may not be fixed any time soon.
 - Parts of JPQL is not implemented yet. 
 
+## Docs
+
+We are still working on final docs, but we have posted some draft docs here:
+
+* [Force.com Database Overview](doc/ForceDBOverview.md)
+* [Force.com Database JPA Provider](doc/JPAProvider.md)
+
 # Getting Started
 
 This is a quick guide to configuring your first VMforce project, deploy it on your own local tcServer and then deploy it to VMforce.
