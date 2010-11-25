@@ -70,6 +70,24 @@ You'll also need to add the VMforce snapshot repository location to the reposito
 
 See the [`pom.xml` file in the VMforceSpringMVC](https://github.com/forcedotcom/vmforce/blob/master/samples/VMforceSpringMVC/pom.xml) sample app for a complete example.
 
+DataNucleus adds code to persistent classes using class enhancement. You can set up Maven to do this enhancement as a post-compilation step by adding the DataNucleus enhancer plugin to the `pom.xml` file's `pluginRepositories` section:
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>DataNucleus_2</id>
+			<url>http://www.datanucleus.org/downloads/maven2/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+The VMforceSpringMVC sample demonstrates all this configuration and you can use diff to see exactly what was done to the basic Spring MVC app that STS generates by default:
+
+	$ cd [your_local_vmforce_repo]/samples/VMforceSpringMVC
+	$ git diff -w 191e7bfd3dbb4b4a56afa4dc13713a4fa269de0c..HEAD .
+
+This doc may not cover every detail in the sample app so if you're building your own project and run into issues, this diff can help show how the sample app was built.
+
+### JPA persistence configuration
+
 VMforce uses the standard JPA `persistence.xml` file for its configuration file. In the compiled and packaged application this file must reside in the root of the classpath, for example in the root of the `WEB-INF/classes` directory. In the VMforce samples shown here, the file resides in `src/main/resources/META-INF` and maven is configured to copy this file to its target destination as part of the build process.
 
 This configuration file includes one or more persistence-unit elements. A persistence unit defines a set of classes and how to persist them. Each persistence unit has a unique name. In the following example, there is one unit named 
@@ -125,6 +143,61 @@ Set this property to true to ensure that all JPA operations are buffered until e
 #### sfdc.AllOrNothing
 
 Set this property to true to ensure that all changes are rolled back if any errors occur when persisting records. If the property is set to false, changes to records with no errors are committed even if there are errors persisting other records in the transaction. If a transaction includes an insert, update, and a delete operation, this property applies to each operation separately. For example, if the insert and delete operations have no errors, but the update operation has at least one error, the insert and operations are committed, while the update operation doesn't change any records due to the error.
+
+### Setting up Spring components
+
+The Spring framework will handle instantiation of the EntityManager and transactions for you and you'll need to add some configuration to your basic Spring MVC Web app to make this work. It's a good idea to keep this additional configuration in a separate Spring config file, to separate it as much as possible from the standard config. In the VMforceSpringMVC sample app this config is factored into the [force-config.xml](../samples/VMforceSpringMVC/src/main/webapp/WEB-INF/spring/force-config.xml) file which looks like this:
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<beans xmlns="http://www.springframework.org/schema/beans"
+	       xmlns:context="http://www.springframework.org/schema/context"
+	       xmlns:tx="http://www.springframework.org/schema/tx"
+	       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	    xsi:schemaLocation="
+	        http://www.springframework.org/schema/beans
+	        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	        http://www.springframework.org/schema/context
+	        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	        http://www.springframework.org/schema/tx
+	        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	    <tx:annotation-driven />
+    
+	    <context:component-scan base-package="com.vmforce.samples" />
+
+		<context:property-placeholder location="classpath:connector.properties" />
+		
+	    <!-- Drives transactions using local JPA APIs -->
+	    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+	        <property name="entityManagerFactory" ref="entityManagerFactory" />
+	    </bean>
+    
+	    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+	        <property name="persistenceUnitName" value="forceDatabase" />
+	    </bean>
+
+	    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	 	<bean id="forceService" class="com.salesforce.connector.SFDCServiceConnector">
+	    	<property name="sfdcConnectionName" value="JPAConfiguredConnection"/>
+	    </bean>
+
+	</beans>
+
+You'll then need to add a reference to this file in the [root-config.xml](../samples/VMforceSpringMVC/src/main/webapp/WEB-INF/spring/root-config.xml):
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+		<!-- Root Context: defines shared resources visible to all other web components -->
+		
+		<import resource="force-config.xml" />
+
+	</beans>
+
+As mentioned earlier, check out the sample app and the diff from the checkin of the plain spring MVC app to see all the detailed differences.
 
 ## Defining JPA Entities
 
@@ -348,15 +421,3 @@ If you want to create a Force.com `percent` field, use `@CustomField(type=FieldT
 ## Writing persistence code
 
 coming soon...
-
-
-
-
-
-
-
-
-
-
-
-
