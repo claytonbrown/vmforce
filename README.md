@@ -27,8 +27,8 @@ This is the home for alpha testers of VMforce. It is still somewhat experimental
 
 We are still working on final docs, but we have posted some draft docs here:
 
-* [Force.com Database Overview](doc/ForceDBOverview.md)
-* [Force.com Database JPA Provider](doc/JPAProvider.md)
+* [Force.com Database Overview](https://github.com/forcedotcom/vmforce/blob/master/doc/ForceDBOverview.md)
+* [Force.com Database JPA Provider](https://github.com/forcedotcom/vmforce/blob/master/doc/JPAProvider.md)
 
 # Getting Started
 
