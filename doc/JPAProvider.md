@@ -380,7 +380,7 @@ A master-detail relationship is similar to a lookup relationship, with the diffe
 
 ### Making your entity collaborative with Chatter
 
-Force.com has collaboration built-in. You can enable feeds for every entity in your database. Users can follow entities and be updated when they change. To enable Chatter on an entity, you use the `@CustomObject(enableFeeds=true)` annotation. For example:
+Force.com has collaboration built-in. You can enable feeds for every entity in your database. Users can follow entities and be updated when they change. To enable Chatter on an entity, you use the `@CustomObject(enableFeeds=true)` annotation on the entity class. For example:
 
 	@Entity
 	@CustomObject(enableFeeds=true)
@@ -392,6 +392,19 @@ Force.com has collaboration built-in. You can enable feeds for every entity in y
 		
 		String name;
 	
+	}
+
+Once feeds is enabled for an entity, you can specify which fields should trigger feed updates using the `@CustomField(feedsEnabled=true)`. For example:
+
+	@CustomField(enableFeeds=true)
+	private String myField;
+
+	public String getMyField() {
+		return myField;
+	}
+	
+	public void setMyField(String value) {
+		myField = value;
 	}
 
 ### Other Force.com specific types
