@@ -60,6 +60,15 @@ We use SpringSource Tool Suite which comes with maven integration and other good
 
 The project should import and compile. The compilation may fail until next step is completed.
 
+## Application naming restrictions
+
+If you're creating your own app, keep in mind the following restrictions on the application name:
+
+* It must start with a letter
+* It must only contain letters, numbers and underscore ('_')
+* The name is case insensitive and must be unique for your account. E.g, you can have an app called HelloWorld and helloworld deployed at the same time.
+* The name must be at least 6 characters long
+
 ## Set up the connector.properties file
 
 Go to the directory src/main/resources and copy the example properties file to connector.properties
