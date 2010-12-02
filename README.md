@@ -78,6 +78,8 @@ Go to the directory src/main/resources and copy the example properties file to c
 
 Edit the connector.properties files and insert your Force.com username and password.
 
+Note: The password you use here needs to have a security token at the end the same way the configuration for a force.com API client does. For example, if your password is mypassword, and your security token is XXXXXXXXXX, then you must enter mypasswordXXXXXXXXXX. You can [obtain a security token](https://na1.salesforce.com/help/doc/en/user_security_token.htm) from your developer account.
+
 For now, you can ignore the OAuth consumer key and secret. We will shortly document how to use these.
 
 ## Build your app
@@ -131,7 +133,7 @@ The VMforce plugin for STS allows you to deploy and manage your application in t
 1. In the Servers pane, right-click and select New -> Server
 1. In the filter text box, type "VMforce" and select the VMforce Cloud Server from the list
 1. Leave the hostname as localhost and click next.
-1. Type in your Force.com Developer Account credentials and set the URL to: https://api.alpha.vmforce.com
+1. Type in your Force.com Developer Account credentials and set the URL to: https://api.alpha.vmforce.com. Your password should include a security token here. This is the same as what you entered into connector.properties above.
 1. Use the "Check Credentials" button to tests that it's configured correctly and click Finish.
 
 ### Deploy your application to VMforce
@@ -142,7 +144,7 @@ You're now ready to deploy your application:
 1. Select the VMforce Cloud as Server
 1. Click Finish.
 1. On the launch application dialog, change the name of your app to include something unique, so it doesn't clash with other names. All apps are currently deployed in a single namespace.
-1. You're done. STS will open a browser on your app's front page. If you see a 404, try refresh a few seconds later.
+1. You're done. STS will open a browser on your app's front page. If you see a 404, try refresh a few seconds later. You can also check your app from any other browser. It will be available at: http://applicationName.alpha.vmforce.com where "applicationName" is the unique name you entered while deploying your application.
 
 ### Using the command-line tool
 
