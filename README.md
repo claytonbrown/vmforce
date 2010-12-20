@@ -154,14 +154,22 @@ VMforce also comes with a [command line tool called vmc](http://rubygems.org/gem
 
 (See below for Windows install). You can get help with
 
-	$ vmc help
-	
-For example, to list your deployed apps:
+First step is to target the alpha environment:
+
+	$ vmc target api.alpha.vmforce.com
+
+then log in:
 
 	$ vmc login
 	Email: jespertest2@vmforce.com
 	Password: ********
 	successfully logged in
+
+Now you can execute VMforce commands. To get a list of commands use:
+
+	$ vmc help
+
+For example, you can get a list of deployed apps:	
 
 	$ vmc apps
 	No applications available.
