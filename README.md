@@ -158,11 +158,11 @@ First step is to target the alpha environment:
 
 	$ vmc target api.alpha.vmforce.com
 
-then log in:
+then log in using your VMforce developer account login and password *with the security token appended to the password*:
 
 	$ vmc login
 	Email: jespertest2@vmforce.com
-	Password: ********
+	Password: ***************************
 	successfully logged in
 
 Now you can execute VMforce commands. To get a list of commands use:
