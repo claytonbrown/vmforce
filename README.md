@@ -65,7 +65,7 @@ The project should import and compile. The compilation may fail until next step 
 If you're creating your own app, keep in mind the following restrictions on the application name:
 
 * It must start with a letter
-* It must only contain letters, numbers and underscore ('_'). _NOTE: You currently cannot use dash ('-') in your application name_
+* It must only contain letters, numbers and underscore ('_'). NOTE: You currently cannot use dash ('-') in your application name
 * The name is case insensitive and must be unique for your account. E.g, you cannot have an app called HelloWorld and helloworld deployed at the same time.
 * The name must be at least 6 characters long
 * The name must be a maximum of 80 characters
