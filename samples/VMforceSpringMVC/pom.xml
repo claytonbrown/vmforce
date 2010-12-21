@@ -176,10 +176,13 @@
 			<url>http://repo.t.salesforce.com/archiva/repository/snapshots</url>
 		</repository>
 	    <!--  VMforce release repository -->
-	    <repository>
+		<repository>
 			<id>com.force.maven.release</id>
 			<name>Force.com Maven Repo</name>
 			<url>http://repo.t.salesforce.com/archiva/repository/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 		<!-- For testing against latest Spring snapshots -->
 		<repository>
