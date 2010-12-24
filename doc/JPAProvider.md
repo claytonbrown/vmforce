@@ -21,9 +21,9 @@ To enable the Force.com JPA provider in a standard Spring MVC application you ne
 You can add these libraries to a standard Spring MVC 3.0.4 project by adding the following dependencies to the `pom.xml` file:
 
 	<dependency>
-		<groupId>com.salesforce.sdk.persistence</groupId>
-		<artifactId>datanucleus-sfdc</artifactId>
-		<version>20.0.1-SNAPSHOT</version>
+		<groupId>com.force.sdk</groupId>
+		<artifactId>force-jpa</artifactId>
+		<version>20.0.0</version>
 	</dependency>
 	<dependency>
 		<groupId>org.datanucleus</groupId>
@@ -60,12 +60,12 @@ You can add these libraries to a standard Spring MVC 3.0.4 project by adding the
 		<version>2.2</version>
 	</dependency>
 
-You'll also need to add the VMforce snapshot repository location to the repositories section
+You'll also need to add the Force.com Maven repository location to the repositories section
 
 	<repository>
-		<id>com.force.maven.snapshot</id>
-		<name>Force.com Maven Snapshot Repo</name>
-		<url>http://repo.t.salesforce.com/archiva/repository/snapshots</url>
+		<id>com.force.maven.release</id>
+		<name>Force.com Maven Repo</name>
+		<url>http://repo.t.salesforce.com/archiva/repository/releases</url>
 	</repository>
 
 See the [`pom.xml` file in the VMforceSpringMVC](https://github.com/forcedotcom/vmforce/blob/master/samples/VMforceSpringMVC/pom.xml) sample app for a complete example.
