@@ -2,4 +2,4 @@
 
 ALL INFORMATION, SOFTWARE AND SERVICES ON THIS SITE ARE PART OF A DEVELOPER PREVIEW. NONE OF THE SOFTWARE AND SERVICES MENTIONED HERE ARE SUPPORTED BY SALESFORCE.COM OR COMMERCIALLY AVAILABLE.
 
-[Start here](https://github.com/forcedotcom/vmforce/wiki/Welcome)
+[Start here](https://github.com/forcedotcom/vmforce/wiki)
