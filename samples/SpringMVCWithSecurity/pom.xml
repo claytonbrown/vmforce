@@ -10,14 +10,10 @@
   
   <properties>
     <eclipse.dependency>true</eclipse.dependency>
-    <force.sdk.version>20.0.1-SNAPSHOT</force.sdk.version>
-    <force.metadataapi.version>${force.sdk.version}</force.metadataapi.version>
-    <force.partnerapi.version>${force.sdk.version}</force.partnerapi.version>
-    <force.wsc.version>${force.sdk.version}</force.wsc.version>
+    <force.sdk.version>20.0.0</force.sdk.version>
     <datanucleus.version>2.1.0-release</datanucleus.version>
     <spring.version>3.0.3.RELEASE</spring.version>
     <spring.security.version>3.0.3.RELEASE</spring.security.version>
-    <testng.version>5.12.1</testng.version>
   </properties>
 
   <repositories>
@@ -25,6 +21,11 @@
          <id>com.force.maven.snapshot</id>
          <name>Force.com Maven Snapshot Repo</name>
          <url>http://repo.t.salesforce.com/archiva/repository/snapshots</url>
+      </repository>
+      <repository>
+         <id>com.force.maven.release</id>
+         <name>Force.com Maven Release Repo</name>
+         <url>http://repo.t.salesforce.com/archiva/repository/releases</url>
       </repository>
       <repository>
         <id>com.springsource.repository.bundles.release</id>
@@ -114,14 +115,14 @@
   <dependencies>
 
     <dependency>
-      <groupId>com.salesforce.sdk.persistence</groupId>
-      <artifactId>datanucleus-sfdc</artifactId>
-      <version>${force.sdk.version}</version>
+      <groupId>com.force.sdk</groupId>
+      <artifactId>force-jpa</artifactId>
+      <version>20.0.0</version>
     </dependency>
     <dependency>
-      <groupId>com.salesforce.sdk.security</groupId>
-      <artifactId>oauth</artifactId>
-      <version>${force.sdk.version}</version>
+      <groupId>com.force.sdk</groupId>
+      <artifactId>force-oauth</artifactId>
+      <version>20.0.0</version>
     </dependency>
 
     <dependency>

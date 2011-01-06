@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.salesforce.persistence.datanucleus.annotation.CustomObject;
+import com.force.sdk.jpa.annotation.CustomObject;
 
 /**
  * @author jjoergensen@salesforce.com

@@ -28,8 +28,10 @@
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
- 	<bean id="forceService" class="com.salesforce.connector.SFDCServiceConnector">
-    	<property name="sfdcConnectionName" value="JPAConfiguredConnection"/>
+ 	<bean id="forceService" class="com.force.sdk.connector.ForceServiceConnector">
+ 		<property name="username" value="${force.userName}"/>
+ 		<property name="password" value="${force.password}"/>
+ 		<property name="endPoint" value="${force.endPoint}/services/Soap/u/20.0"/>
     </bean>
 
 </beans>
