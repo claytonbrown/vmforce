@@ -13,7 +13,7 @@
     <force.sdk.version>20.0.0</force.sdk.version>
     <datanucleus.version>2.1.0-release</datanucleus.version>
     <spring.version>3.0.3.RELEASE</spring.version>
-    <spring.security.version>3.0.3.RELEASE</spring.security.version>
+    <spring.security.version>5.4.0</spring.security.version>
   </properties>
 
   <repositories>
